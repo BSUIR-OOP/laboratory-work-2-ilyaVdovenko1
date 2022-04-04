@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Lab2App.ShapesModels;
+﻿namespace Lab2App.Models.ShapesModels;
 
 public class Dot
 {

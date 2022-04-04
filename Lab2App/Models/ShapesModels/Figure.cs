@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Lab2App.Interfaces;
 
-namespace Lab2App.ShapesModels;
+namespace Lab2App.Models.ShapesModels;
 
 public abstract class Figure : IFigure
 {

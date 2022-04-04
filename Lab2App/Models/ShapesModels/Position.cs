@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Lab2App.ShapesModels;
+﻿namespace Lab2App.Models.ShapesModels;
 
 public class Position : object
 {

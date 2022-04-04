@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Lab2App.ShapesModels;
+namespace Lab2App.Models.ShapesModels;
 
 public sealed class Line : Figure
 {

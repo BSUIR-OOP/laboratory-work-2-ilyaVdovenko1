@@ -1,6 +1,6 @@
-﻿using Lab2App.ShapesModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Lab2App.Models.ShapesModels;
 
 namespace Lab2App.Interfaces
 {
