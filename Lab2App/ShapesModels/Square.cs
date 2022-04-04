@@ -20,16 +20,21 @@ public class Square : Rectangle
         return dots;
     }
 
-    private IEnumerable<Line> RepresentFigureAsLines(Position start, Position end, int step)
+    private IEnumerable<Line> RepresentFigureAsLines(Position start, Position initialEnd, int step)
     {
-        var length = end.XCoordinate - start.XCoordinate;
+        if (start.XCoordinate > initialEnd.XCoordinate || start.YCoordinate > initialEnd.YCoordinate)
+        {
+            (start, initialEnd) = (initialEnd, start);
+        }
+
+        var length = initialEnd.XCoordinate - start.XCoordinate;
+        var end = new Position(start.XCoordinate + length, start.YCoordinate - length);
         var listOfLines = new List<Line>
         {
-            new (this.FigureId, new Position(start.XCoordinate, length), start, step),
-            new (this.FigureId, start, new Position(start.XCoordinate + length, start.YCoordinate + length), step),
-            new (this.FigureId, new Position(start.XCoordinate + length, start.YCoordinate + length),
-                new Position(start.XCoordinate + length, start.YCoordinate - length), step),
-            new (this.FigureId, end, new Position(start.XCoordinate, start.YCoordinate - length), step),
+            new (this.FigureId, new Position(start.XCoordinate, end.YCoordinate), start, step),
+            new (this.FigureId, start, new Position(end.XCoordinate, start.YCoordinate), step),
+            new (this.FigureId, new Position(end.XCoordinate, start.YCoordinate), end, step),
+            new (this.FigureId, end, new Position(start.XCoordinate, end.YCoordinate), step),
         };
         return listOfLines;
     }

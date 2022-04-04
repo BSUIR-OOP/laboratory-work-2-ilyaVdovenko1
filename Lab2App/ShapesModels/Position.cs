@@ -6,15 +6,6 @@ public class Position : object
 {
     public Position(int x, int y)
     {
-        if (x < 0)
-        {
-            throw new ArgumentException("Coordinate can not be less then 0", nameof(x));
-        }
-
-        if (y < 0)
-        {
-            throw new ArgumentException("Coordinate can not be less then 0", nameof(y));
-        }
 
         this.XCoordinate = x;
         this.YCoordinate = y;

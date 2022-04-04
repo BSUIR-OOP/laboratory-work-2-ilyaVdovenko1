@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Lab2App.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace Lab2App.ShapesModels;
 
-public abstract class Figure
+public abstract class Figure : IFigure
 {
     protected Figure(int figureId)
     {
@@ -12,10 +13,7 @@ public abstract class Figure
 
     public int FigureId { get; }
 
-    public virtual Func<Position, Position, int, IEnumerable<Dot>> Draw()
-    {
-        return this.RepresentFigureAsDots;
-    }
+    public Func<Position, Position, int, IEnumerable<Dot>> ProvideGenerateDots => this.RepresentFigureAsDots;
 
     protected abstract IEnumerable<Dot> RepresentFigureAsDots(Position start, Position end, int step);
 }

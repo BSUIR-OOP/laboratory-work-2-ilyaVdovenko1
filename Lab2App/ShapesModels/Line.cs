@@ -24,19 +24,12 @@ public sealed class Line : Figure
 
     public IEnumerable<Dot> RepresentFigureAsDots()
     {
-        if (this.startPoint.XCoordinate < this.endPoint.XCoordinate)
-        {
-            (this.startPoint, this.endPoint) = (this.endPoint, this.startPoint);
-        }
 
         var absStep = Math.Abs(this.step);
         var dots = new List<Dot>();
         var functionalDependence = FindFunctionalDependence(this.startPoint, this.endPoint);
-        for (var currentX = this.startPoint.XCoordinate; currentX < this.endPoint.XCoordinate; currentX += absStep)
-        {
-            dots.Add(new Dot(this.FigureId, new Position(currentX, functionalDependence(currentX))));
-        }
-
+        dots.Add(new Dot(this.FigureId, this.startPoint));
+        dots.Add(new Dot(this.FigureId, this.endPoint));
         return dots;
     }
 
@@ -45,18 +38,15 @@ public sealed class Line : Figure
         this.step = step;
         this.startPoint = start;
         this.endPoint = end;
-        if (this.startPoint.XCoordinate < this.endPoint.XCoordinate)
+        if (this.startPoint.XCoordinate > this.endPoint.XCoordinate)
         {
             (this.startPoint, this.endPoint) = (this.endPoint, this.startPoint);
         }
 
         var absStep = Math.Abs(this.step);
         var dots = new List<Dot>();
-        var functionalDependence = FindFunctionalDependence(this.startPoint, this.endPoint);
-        for (var currentX = this.startPoint.XCoordinate; currentX < this.endPoint.XCoordinate; currentX += absStep)
-        {
-            dots.Add(new Dot(this.FigureId, new Position(currentX, functionalDependence(currentX))));
-        }
+        dots.Add(new Dot(this.FigureId, this.startPoint));
+        dots.Add(new Dot(this.FigureId, this.endPoint));
 
         return dots;
     }

@@ -15,7 +15,7 @@ public class Circle : Figure
 
     protected override IEnumerable<Dot> RepresentFigureAsDots(Position start, Position end, int step)
     {
-        if (start.XCoordinate < end.XCoordinate)
+        if (start.XCoordinate > end.XCoordinate)
         {
             (start, end) = (end, start);
         }

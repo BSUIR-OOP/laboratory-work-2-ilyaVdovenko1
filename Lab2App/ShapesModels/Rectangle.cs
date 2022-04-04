@@ -25,11 +25,16 @@ public class Rectangle : Quadrangle
 
     private IEnumerable<Line> RepresentFigureAsLines(Position start, Position end, int step)
     {
+        if (start.XCoordinate > end.XCoordinate || start.YCoordinate > end.YCoordinate)
+        {
+            (start, end) = (end, start);
+        }
+
         var listOfLines = new List<Line>
         {
-            new (this.FigureId, new Position(start.XCoordinate, start.YCoordinate - end.YCoordinate), start, step),
-            new (this.FigureId, start, new Position(end.XCoordinate, start.XCoordinate), step),
-            new (this.FigureId, end, new Position(end.XCoordinate, start.YCoordinate - end.YCoordinate), step),
+            new (this.FigureId, new Position(start.XCoordinate, end.YCoordinate), start, step),
+            new (this.FigureId, start, new Position(end.XCoordinate, start.YCoordinate), step),
+            new (this.FigureId, new Position(end.XCoordinate, start.YCoordinate), end, step),
             new (this.FigureId, end, new Position(start.XCoordinate, end.YCoordinate), step),
         };
         return listOfLines;
