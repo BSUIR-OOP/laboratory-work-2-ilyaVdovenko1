@@ -17,11 +17,11 @@
             <ColumnDefinition Width="83*"/>
             <ColumnDefinition Width="417*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="Circle_Btn" Content="Circle" Margin="25,0,0,61" VerticalAlignment="Bottom" Click="Circle_Btn_Click" HorizontalAlignment="Left" Width="56"/>
-        <Button x:Name="Rectangle_Btn" Content="Rectangle" Margin="25,0,0,23" VerticalAlignment="Bottom" Click="Rectangle_Btn_Click" HorizontalAlignment="Left" Width="56"/>
-        <Button x:Name="Square_Btn" Content="Square" Margin="25,0,0,0" VerticalAlignment="Center" Click="Square_Btn_Click" HorizontalAlignment="Left" Width="56" Grid.RowSpan="2"/>
-        <Button x:Name="Line_Btn" VerticalAlignment="Top" Content="Line" Margin="25,31,0,0" Click="Line_Btn_Click" HorizontalAlignment="Left" Width="56" Grid.Row="1" Height="20" />
-        <Canvas Name="DrawField_Canvas" Margin="0,10,10,0" Background="#FFECEAEA" MouseDown="Canvas_MouseDown" MouseUp="Canvas_MouseUp" Grid.RowSpan="3" Height="664" VerticalAlignment="Top" HorizontalAlignment="Right" Width="785" Grid.Column="1"/>
-        <syncfusion1:ColorPicker Name="colorPicker" Margin="10,31,0,0" Grid.Row="2" HorizontalAlignment="Left" Width="140" Height="22" VerticalAlignment="Top" />
+        <Button x:Name="CircleBtn" Content="Circle" Margin="25,0,0,61" VerticalAlignment="Bottom" Click="Circle_Btn_Click" HorizontalAlignment="Left" Width="56"/>
+        <Button x:Name="RectangleBtn" Content="Rectangle" Margin="25,0,0,23" VerticalAlignment="Bottom" Click="Rectangle_Btn_Click" HorizontalAlignment="Left" Width="56"/>
+        <Button x:Name="SquareBtn" Content="Square" Margin="25,0,0,0" VerticalAlignment="Center" Click="Square_Btn_Click" HorizontalAlignment="Left" Width="56" Grid.RowSpan="2"/>
+        <Button x:Name="LineBtn" VerticalAlignment="Top" Content="Line" Margin="25,31,0,0" Click="Line_Btn_Click" HorizontalAlignment="Left" Width="56" Grid.Row="1" Height="20" />
+        <Canvas Name="DrawFieldCanvas" Margin="0,10,10,0" Background="#FFECEAEA" MouseDown="Canvas_MouseDown" MouseUp="Canvas_MouseUp" Grid.RowSpan="3" Height="664" VerticalAlignment="Top" HorizontalAlignment="Right" Width="785" Grid.Column="1"/>
+        <syncfusion1:ColorPicker Name="ColorPicker" Margin="10,31,0,0" Grid.Row="2" HorizontalAlignment="Left" Width="140" Height="22" VerticalAlignment="Top" />
     </Grid>
 </Window>

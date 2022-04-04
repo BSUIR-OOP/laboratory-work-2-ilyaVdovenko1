@@ -42,15 +42,15 @@ namespace Lab2App
             this.figure = new ShapesModels.Line(this.idCounter++);
         }
 
-        private void Canvas_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var relativeMouseCoordinates = e.GetPosition(this.DrawField_Canvas);
+            var relativeMouseCoordinates = e.GetPosition(this.DrawFieldCanvas);
             this.startMousePosition = new Position((int)relativeMouseCoordinates.X, (int)relativeMouseCoordinates.Y);
         }
 
         private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            var relativeMouseCoordinates = e.GetPosition(this.DrawField_Canvas);
+            var relativeMouseCoordinates = e.GetPosition(this.DrawFieldCanvas);
 
             this.endMousePosition = new Position((int)relativeMouseCoordinates.X, (int)relativeMouseCoordinates.Y);
             if (this.figure is not null)
@@ -68,7 +68,7 @@ namespace Lab2App
                     myPolygon.Points.Add(new Point(dot.Point.XCoordinate, dot.Point.YCoordinate));
                 }
 
-                this.DrawField_Canvas.Children.Add(myPolygon);
+                this.DrawFieldCanvas.Children.Add(myPolygon);
             }
         }
     }
