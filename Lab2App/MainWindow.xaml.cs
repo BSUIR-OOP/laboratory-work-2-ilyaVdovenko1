@@ -1,92 +1,81 @@
-﻿using System.Windows;
+﻿namespace Lab2App;
+
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
-using Lab2App.Interfaces;
-using Lab2App.Models.ShapesModels;
-using Line = Lab2App.Models.ShapesModels.Line;
-using Rectangle = Lab2App.Models.ShapesModels.Rectangle;
+using Interfaces;
+using Models;
+using Models.ShapesModels;
+using Line = Models.ShapesModels.Line;
+using Rectangle = Models.ShapesModels.Rectangle;
 
-namespace Lab2App
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    private const int Step = 1;
+    private readonly Layer layer;
+    private IFigure? figure;
+    private Position? startMousePosition;
+    private Position? endMousePosition;
+    private Brush borderColor;
+
+    public MainWindow()
     {
-        private const int Step = 1;
-        private IFigure? figure;
-        private int idCounter;
-        private Position? startMousePosition;
-        private Position? endMousePosition;
-        private Brush borderColor;
+        this.InitializeComponent();
+        this.borderColor = Brushes.Black;
+        this.layer = new Layer();
+    }
 
-        public MainWindow()
+    private void Circle_Btn_Click(object sender, RoutedEventArgs e)
+    {
+        this.figure = new Circle(this.layer.CurrentFigureId);
+    }
+
+    private void Rectangle_Btn_Click(object sender, RoutedEventArgs e)
+    {
+        this.figure = new Rectangle(this.layer.CurrentFigureId);
+    }
+
+    private void Square_Btn_Click(object sender, RoutedEventArgs e)
+    {
+        this.figure = new Square(this.layer.CurrentFigureId);
+    }
+
+    private void Line_Btn_Click(object sender, RoutedEventArgs e)
+    {
+        this.figure = new Line(this.layer.CurrentFigureId);
+    }
+
+    private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        var relativeMouseCoordinates = e.GetPosition(this.DrawFieldCanvas);
+        this.startMousePosition = new Position((int)relativeMouseCoordinates.X, (int)relativeMouseCoordinates.Y);
+    }
+
+    private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
+    {
+        var relativeMouseCoordinates = e.GetPosition(this.DrawFieldCanvas);
+
+        this.endMousePosition = new Position((int)relativeMouseCoordinates.X, (int)relativeMouseCoordinates.Y);
+        if (this.figure is null || this.startMousePosition is null || this.endMousePosition is null)
         {
-            this.InitializeComponent();
-            this.idCounter = 0;
-            this.borderColor = Brushes.Black;
+            return;
         }
 
-        private void Circle_Btn_Click(object sender, RoutedEventArgs e)
+        var pen = new Drawer<Canvas>(this.figure, this.DrawFieldCanvas);
+        pen.Draw(this.startMousePosition, this.endMousePosition, Step, this.borderColor);
+        this.layer.AddFigure(this.figure);
+    }
+
+    private void ColorPicker_OnSelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+    {
+        if (this.ColorPicker.SelectedColor.HasValue)
         {
-            this.figure = new Circle(this.idCounter++);
-        }
-
-        private void Rectangle_Btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.figure = new Rectangle(this.idCounter++);
-        }
-
-        private void Square_Btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.figure = new Square(this.idCounter++);
-        }
-
-        private void Line_Btn_Click(object sender, RoutedEventArgs e)
-        {
-            this.figure = new Line(this.idCounter++);
-        }
-
-        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var relativeMouseCoordinates = e.GetPosition(this.DrawFieldCanvas);
-            this.startMousePosition = new Position((int)relativeMouseCoordinates.X, (int)relativeMouseCoordinates.Y);
-        }
-
-        private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            var relativeMouseCoordinates = e.GetPosition(this.DrawFieldCanvas);
-
-            this.endMousePosition = new Position((int)relativeMouseCoordinates.X, (int)relativeMouseCoordinates.Y);
-            if (this.figure is null || this.startMousePosition is null || this.endMousePosition is null)
-            {
-                return;
-            }
-
-            var dots = this.figure.ProvideGenerateDots.Invoke(this.startMousePosition, this.endMousePosition, Step);
-            var myPolygon = new Polygon
-            {
-                Stroke = this.borderColor,
-                StrokeThickness = 1,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Center,
-            };
-            foreach (var dot in dots)
-            {
-                myPolygon.Points.Add(new Point(dot.Point.XCoordinate, dot.Point.YCoordinate));
-            }
-
-            this.DrawFieldCanvas.Children.Add(myPolygon);
-        }
-
-        private void ColorPicker_OnSelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
-        {
-            if (ColorPicker.SelectedColor.HasValue)
-            {
-                var color = ColorPicker.SelectedColor.Value;
-                this.borderColor = new SolidColorBrush(color);
-            }
+            var color = this.ColorPicker.SelectedColor.Value;
+            this.borderColor = new SolidColorBrush(color);
         }
     }
 }

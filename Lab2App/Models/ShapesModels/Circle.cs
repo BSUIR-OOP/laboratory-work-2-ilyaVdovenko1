@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Lab2App.Models.ShapesModels;
 
-namespace Lab2App.Models.ShapesModels;
+using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Represents circle object.
