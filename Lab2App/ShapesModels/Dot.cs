@@ -2,9 +2,6 @@
 
 namespace Lab2App.ShapesModels;
 
-/// <summary>
-/// Represents dot figure.
-/// </summary>
 public class Dot
 {
     public Dot(int figureId, Position point)

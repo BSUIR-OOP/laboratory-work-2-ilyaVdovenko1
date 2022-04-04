@@ -1,9 +1,9 @@
-﻿using Lab2App.Interfaces;
-using Lab2App.ShapesModels;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Lab2App.Interfaces;
+using Lab2App.ShapesModels;
 
 namespace Lab2App
 {
@@ -16,7 +16,6 @@ namespace Lab2App
         private int idCounter;
         private Position startMousePosition;
         private Position endMousePosition;
-
 
         public MainWindow()
         {
@@ -57,11 +56,13 @@ namespace Lab2App
             if (this.figure is not null)
             {
                 var dots = this.figure.ProvideGenerateDots.Invoke(this.startMousePosition, this.endMousePosition, 1);
-                var myPolygon = new Polygon();
-                myPolygon.Stroke = Brushes.Black;
-                myPolygon.StrokeThickness = 1;
-                myPolygon.HorizontalAlignment = HorizontalAlignment.Left;
-                myPolygon.VerticalAlignment = VerticalAlignment.Center;
+                var myPolygon = new Polygon
+                {
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
                 foreach (var dot in dots)
                 {
                     myPolygon.Points.Add(new Point(dot.Point.XCoordinate, dot.Point.YCoordinate));

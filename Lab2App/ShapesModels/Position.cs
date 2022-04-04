@@ -6,7 +6,6 @@ public class Position : object
 {
     public Position(int x, int y)
     {
-
         this.XCoordinate = x;
         this.YCoordinate = y;
     }

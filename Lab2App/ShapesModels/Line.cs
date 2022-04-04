@@ -24,12 +24,11 @@ public sealed class Line : Figure
 
     public IEnumerable<Dot> RepresentFigureAsDots()
     {
-
-        var absStep = Math.Abs(this.step);
-        var dots = new List<Dot>();
-        var functionalDependence = FindFunctionalDependence(this.startPoint, this.endPoint);
-        dots.Add(new Dot(this.FigureId, this.startPoint));
-        dots.Add(new Dot(this.FigureId, this.endPoint));
+        var dots = new List<Dot>
+        {
+            new Dot(this.FigureId, this.startPoint),
+            new Dot(this.FigureId, this.endPoint),
+        };
         return dots;
     }
 
@@ -43,36 +42,12 @@ public sealed class Line : Figure
             (this.startPoint, this.endPoint) = (this.endPoint, this.startPoint);
         }
 
-        var absStep = Math.Abs(this.step);
-        var dots = new List<Dot>();
-        dots.Add(new Dot(this.FigureId, this.startPoint));
-        dots.Add(new Dot(this.FigureId, this.endPoint));
+        var dots = new List<Dot>
+        {
+            new (this.FigureId, this.startPoint),
+            new (this.FigureId, this.endPoint),
+        };
 
         return dots;
-    }
-
-    private static Func<int, int> FindFunctionalDependence(Position firstPoint, Position secondPoint)
-    {
-        if (firstPoint.Equals(secondPoint))
-        {
-            return x => x;
-        }
-
-        if (firstPoint.XCoordinate == secondPoint.XCoordinate && firstPoint.YCoordinate != secondPoint.YCoordinate)
-        {
-            return x => x;
-        }
-
-        var xGradient = secondPoint.XCoordinate - firstPoint.XCoordinate;
-        var yGradient = secondPoint.YCoordinate - firstPoint.YCoordinate;
-        var slope = (decimal)yGradient / xGradient;
-        var bias = firstPoint.YCoordinate - (slope * firstPoint.XCoordinate);
-
-        int ResultFunction(int x)
-        {
-            return (int)Math.Round((slope * x) + bias, MidpointRounding.AwayFromZero);
-        }
-
-        return ResultFunction;
     }
 }
